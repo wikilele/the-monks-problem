@@ -1,0 +1,10 @@
+{
+    "epochs" : 320,
+    "learning_rate" : 1.5,
+    "input_units" : 17,
+    "hidden_units" : 3,
+    "output_units" : 1,
+    "weights_upperbound" : 0.1,
+    "weights_lowerbound" : -0.1,
+    "threshold" : 0.5
+}

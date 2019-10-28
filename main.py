@@ -1,5 +1,6 @@
 
 import random
+import json
 
 from DataSet import DataSet
 from PlotService import PlotService
@@ -8,25 +9,27 @@ import first_neural_network.NeuralNetwork.WeightsService as WS
 
 
 
-# TODO
-# sistemare il main
-# prendere gli hyperparam dal json
-# ROC curve?
+# TODO ROC curve?
 
 
 def main():
     # read test file
     ps = PlotService()
     trs = DataSet('data/monks-1.train')
-    
+
     # plotting the training data distribution
-    ps.plot_distribution(trs.get_distribution())
+    # ps.plot_distribution(trs.get_distribution())
 
+    # getting hyperparameters
+    with open('hyperparams1.json','r') as f:
+        hyp= json.load(f)
+
+ 
     # nn
-    ws = WS.WeightsService(-0.2,0.2)
-    nn = NN.NeuralNetwork(1,17,3,1,ws)
+    ws = WS.WeightsService(hyp['weights_lowerbound'],hyp['weights_upperbound'])
+    nn = NN.NeuralNetwork(hyp['learning_rate'],hyp['input_units'],hyp['hidden_units'],hyp['output_units'],ws)
 
-    epoch = 320
+    epoch = hyp['epochs']
     training_set = trs.get_set()
     plot_y = []   
 
@@ -45,12 +48,13 @@ def main():
     tss = DataSet('data/monks-1.test')
     accuracy = 0
     test_set = tss.get_set()
+    threshold = hyp['threshold']
 
     for j in range(len(test_set)):
         output = nn.feed_forward(test_set[j][0])
-        if output[0] >= 0.5 and test_set[j][1][0] == 1: # TruePositive
+        if output[0] >= threshold and test_set[j][1][0] == 1: # TruePositive
             accuracy +=1
-        elif output[0] < 0.5 and test_set[j][1][0] == 0: # TrueNegative
+        elif output[0] < threshold and test_set[j][1][0] == 0: # TrueNegative
             accuracy +=1
     
     print ("ACCURACY " + str(accuracy/len(test_set)*100) + "%") 
