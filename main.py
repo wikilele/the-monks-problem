@@ -1,20 +1,34 @@
 
+import random
+
 from DataSet import DataSet
+from PlotService import PlotService
 import first_neural_network.NeuralNetwork.NeuralNetwork as NN
 import first_neural_network.NeuralNetwork.WeightsService as WS
-import random
+
+
+
+# TODO
+# sistemare il main
+# prendere gli hyperparam dal json
+# ROC curve?
+
 
 def main():
     # read test file
+    ps = PlotService()
     trs = DataSet('data/monks-1.train')
-    #print( trs.get_set() )
+    
+    # plotting the training data distribution
+    ps.plot_distribution(trs.get_distribution())
 
     # nn
     ws = WS.WeightsService(-0.2,0.2)
-    nn = NN.NeuralNetwork(2,17,3,1,ws)
+    nn = NN.NeuralNetwork(1,17,3,1,ws)
 
     epoch = 320
     training_set = trs.get_set()
+    plot_y = []   
 
     for i in range(epoch):
         random.shuffle(training_set)
@@ -23,7 +37,10 @@ def main():
             nn.train(training_input, training_output)
             
         error = nn.compute_total_error(training_set)
-        print("epoch " + str(i) + " error " + str(error))
+        plot_y.append(error)
+        # print("epoch " + str(i) + " error " + str(error))
+
+    ps.plot_error(range(epoch), plot_y)
 
     tss = DataSet('data/monks-1.test')
     accuracy = 0
@@ -36,7 +53,7 @@ def main():
         elif output[0] < 0.5 and test_set[j][1][0] == 0: # TrueNegative
             accuracy +=1
     
-    print (accuracy/len(test_set)) 
+    print ("ACCURACY " + str(accuracy/len(test_set)*100) + "%") 
 
 if __name__ == '__main__':
     main()

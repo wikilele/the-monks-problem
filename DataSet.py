@@ -2,6 +2,16 @@
 class DataSet:
     def __init__(self,filepath):
         self.filepath = filepath
+        self.data_set = []
+
+        with open(self.filepath, 'r') as fp:
+            for line in fp:
+                words_list = line.strip().split()
+                output_class = int(words_list[0])
+                inputs = list(map(int,words_list[1 : 7]))
+                inputs = self.encode_1ofk(inputs)
+                self.data_set.append((inputs, [output_class]))
+        
 
     def encode_1ofk(self,inputs):
         max_values = [3,3,2,3,4,2]
@@ -16,14 +26,13 @@ class DataSet:
 
 
     def get_set(self):
-        data_set = []
-        with open(self.filepath, 'r') as fp:
-            for line in fp:
-                words_list = line.strip().split()
-                output_class = int(words_list[0])
-                inputs = list(map(int,words_list[1 : 7]))
-                inputs = self.encode_1ofk(inputs)
-                data_set.append((inputs, [output_class]))
+        return self.data_set
 
-
-        return data_set
+    def get_distribution(self):
+        distribution = {}
+        for pattern in self.data_set:
+            if pattern[1][0] in distribution:
+                distribution[pattern[1][0]] += 1
+            else:
+                distribution[pattern[1][0]] = 1
+        return distribution
