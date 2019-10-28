@@ -1,5 +1,5 @@
 
-class TrainingSet:
+class DataSet:
     def __init__(self,filepath):
         self.filepath = filepath
 
@@ -16,14 +16,14 @@ class TrainingSet:
 
 
     def get_set(self):
-        training_set = []
+        data_set = []
         with open(self.filepath, 'r') as fp:
             for line in fp:
                 words_list = line.strip().split()
                 output_class = int(words_list[0])
                 inputs = list(map(int,words_list[1 : 7]))
                 inputs = self.encode_1ofk(inputs)
-                training_set.append((inputs, [output_class]))
+                data_set.append((inputs, [output_class]))
 
 
-        return training_set
+        return data_set

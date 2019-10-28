@@ -1,9 +1,9 @@
 import unittest
-from TrainingSet import TrainingSet
+from DataSet import DataSet
 
 
 def test_encode1():
-    ts = TrainingSet('')
+    ts = DataSet('')
     result = ts.encode_1ofk([2,1,1,2,3,1])
     
     assert len(result) == 17
