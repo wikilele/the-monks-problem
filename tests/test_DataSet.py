@@ -3,7 +3,7 @@ from DataSet import DataSet
 
 
 def test_encode1():
-    ts = DataSet('')
+    ts = DataSet('data/monks-1.test')
     result = ts.encode_1ofk([2,1,1,2,3,1])
     
     assert len(result) == 17

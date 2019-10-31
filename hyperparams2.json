@@ -1,10 +1,10 @@
 {
     "epochs" : 320,
-    "learning_rate" : 0.3, 
+    "learning_rate" : 0.15, 
     "input_units" : 17,
     "hidden_units" : 3,
     "output_units" : 1,
-    "weights_upperbound" : 0.00009, 
-    "weights_lowerbound" : -0.00009,
+    "weights_upperbound" : 0.000009, 
+    "weights_lowerbound" : -0.000009,
     "threshold" : 0.5
 }

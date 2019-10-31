@@ -9,7 +9,13 @@ import first_neural_network.NeuralNetwork.WeightsService as WS
 
 
 
-# TODO ROC curve?
+# TODO
+# ROC curve?
+# 1 - batch training - needs a code review
+# 3 - regularization
+# cross validation
+# 4 - momentum
+# 2 - Glorot Benjo weight init - nnes to have a small test (there is a second way to do it) http://proceedings.mlr.press/v9/glorot10a/glorot10a.pdf
 
 
 def main():
@@ -34,16 +40,11 @@ def main():
     plot_y = []   
 
     for i in range(epoch):
-        random.shuffle(training_set)
-        for pattern in training_set:
-            training_input, training_output = pattern
-            nn.train(training_input, training_output)
-            
-        error = nn.compute_total_error(training_set)
+        nn.online_training(training_set)
+        #nn.batch_training(training_set)
+        error = nn.compute_total_error(training_set, mse=True) 
         plot_y.append(error)
-        # print("epoch " + str(i) + " error " + str(error))
-
-    ps.plot_error(range(epoch), plot_y)
+        # print("epoch " + str(i) + " error " + str(error)) 
 
     tss = DataSet('data/monks-1.test')
     accuracy = 0
@@ -58,6 +59,7 @@ def main():
             accuracy +=1
     
     print ("ACCURACY " + str(accuracy/len(test_set)*100) + "%") 
+    ps.plot_error(range(epoch), plot_y)
 
 if __name__ == '__main__':
     main()
