@@ -40,8 +40,8 @@ def main():
     plot_y = []   
 
     for i in range(epoch):
-        nn.online_training(training_set)
-        #nn.batch_training(training_set)
+        #nn.online_training(training_set)
+        nn.batch_training(training_set)
         error = nn.compute_total_error(training_set, mse=True) 
         plot_y.append(error)
         # print("epoch " + str(i) + " error " + str(error)) 
