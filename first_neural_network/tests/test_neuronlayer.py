@@ -1,5 +1,5 @@
 import unittest
-from NeuralNetwork.NeuronLayer import NeuronLayer
+from neuralnetwork.neuronlayer import NeuronLayer
 
 
 class MockWeightsService():    

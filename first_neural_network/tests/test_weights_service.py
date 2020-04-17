@@ -1,5 +1,5 @@
 import unittest
-from NeuralNetwork.WeightsService import WeightsService
+from neuralnetwork.weights_service import WeightsService
 
 
 def test_get_bias():

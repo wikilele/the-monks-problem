@@ -1,6 +1,6 @@
 import unittest
-from NeuralNetwork.NeuralNetwork import NeuralNetwork as myNN
-from tests.pulledNeuralnetwork import NeuralNetwork as pulledNN
+from neuralnetwork import NeuralNetwork as myNN
+from tests.pulled_neuralnetwork import NeuralNetwork as pulledNN
 
 
 class MockWeightsService():    

@@ -1,5 +1,5 @@
 import unittest
-from DataSet import DataSet
+from dataset import DataSet
 
 
 def test_encode1():

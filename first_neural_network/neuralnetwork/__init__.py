@@ -1,15 +1,15 @@
 import random
 import math
-from .NeuronLayer import NeuronLayer
+from .neuronlayer import NeuronLayer
 
 class NeuralNetwork:
 
-    def __init__(self, learning_rate, inputs_number, hidden_number, outputs_number, WeightsService):
+    def __init__(self, learning_rate, inputs_number, hidden_number, outputs_number, weights_service):
         self.learning_rate = learning_rate
         self.inputs_number = inputs_number
 
-        self.hidden_layer = NeuronLayer(hidden_number, inputs_number, WeightsService)
-        self.output_layer = NeuronLayer(outputs_number, hidden_number, WeightsService)
+        self.hidden_layer = NeuronLayer(hidden_number, inputs_number,  weights_service)
+        self.output_layer = NeuronLayer(outputs_number, hidden_number,  weights_service)
 
     def feed_forward(self, inputs):
         ''' sends the input through the network returning the inferred output '''
@@ -90,7 +90,7 @@ class NeuralNetwork:
         # 4. Update hidden neuron weights
         for j, hidden_nu, weight_index in self.weights_iterator(self.hidden_layer):
             hidden_nu.weights[weight_index] -= self.learning_rate * hiddenweights_matrix[j][weight_index] # TODO forse devo dividerlo per len training set
-        print(hiddenweights_matrix)
+
 
     def compute_total_error(self, training_set, mse = True):
         ''' if mse is True it computes the Mean Square Error'''

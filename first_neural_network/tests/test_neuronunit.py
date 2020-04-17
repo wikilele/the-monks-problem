@@ -1,6 +1,6 @@
 import unittest
-from NeuralNetwork.NeuronUnit import NeuronUnit
-from tests.pulledNeuralnetwork import Neuron
+from neuralnetwork.neuronunit import NeuronUnit
+from tests.pulled_neuralnetwork import Neuron
 
 def test_compute_output1():
     ''' all weights setted to 0 '''

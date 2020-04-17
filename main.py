@@ -2,10 +2,10 @@
 import random
 import json
 
-from DataSet import DataSet
-from PlotService import PlotService
-import first_neural_network.NeuralNetwork.NeuralNetwork as NN
-import first_neural_network.NeuralNetwork.WeightsService as WS
+from dataset import DataSet
+from plotservice import PlotService
+from first_neural_network.neuralnetwork import NeuralNetwork
+from first_neural_network.neuralnetwork.weights_service import WeightsService
 
 
 
@@ -32,8 +32,8 @@ def main():
 
  
     # nn
-    ws = WS.WeightsService(hyp['weights_lowerbound'],hyp['weights_upperbound'])
-    nn = NN.NeuralNetwork(hyp['learning_rate'],hyp['input_units'],hyp['hidden_units'],hyp['output_units'],ws)
+    ws = WeightsService(hyp['weights_lowerbound'],hyp['weights_upperbound'])
+    nn = NeuralNetwork(hyp['learning_rate'],hyp['input_units'],hyp['hidden_units'],hyp['output_units'],ws)
 
     epoch = hyp['epochs']
     training_set = trs.get_set()
